@@ -2,6 +2,8 @@ public class Status {
     public enum StatusEnum {
         DISPONIVEL,
         RESERVADO,
-        EMPRESTADO
+        EMPRESTADO,
+        EM_CURSO,
+        FINALIZADO
     }
 }

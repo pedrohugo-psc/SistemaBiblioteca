@@ -72,6 +72,13 @@ public class RegraProfessor implements IRegra{
     public IRegra getRegra(){
         return this;
     }
+
+    public LocalDate DataPrevistaDevolucao(LocalDate dataEmprestimo){
+        LocalDate dataPrevistaDevolucao = dataEmprestimo.plusDays(7);
+
+        return dataPrevistaDevolucao;
+    }
+
     
 	
 

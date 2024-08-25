@@ -36,7 +36,7 @@ public class Main {
     Exemplar exp2 = new Exemplar(lvr3, 3, Status.StatusEnum.DISPONIVEL);
     Exemplar exp3 = new Exemplar(lvr4, 4, Status.StatusEnum.DISPONIVEL);
     Exemplar exp4 = new Exemplar(lvr5, 5, Status.StatusEnum.DISPONIVEL);
-    
+    Exemplar exp5 = new Exemplar(lvr5, 6, Status.StatusEnum.DISPONIVEL);
 
     List<Exemplar> exemplares = new ArrayList<Exemplar>();
 
@@ -45,44 +45,50 @@ public class Main {
     exemplares.add(exp2);
     exemplares.add(exp3);
     exemplares.add(exp4);
+    exemplares.add(exp5);
 
     Biblioteca biblioteca = new Biblioteca(exemplares);
 
-    // IEmprestimo emprestimo = new Emprestimo(lvr1.getIdLivro(),usr1.getidUsuario(), exp);
+    // IEmprestimo emprestimo = new Emprestimo(lvr1.getIdLivro(),usr1.getIdUsuario(), exp);
 
     SistemaEmprestimo sistema = new SistemaEmprestimo(biblioteca, usuarios);
 
     LocalDate dataAtual = LocalDate.now();
 
-    // sistema.processaEmprestimo(lvr1.getIdLivro(), usr2.getidUsuario());
-    // sistema.processaEmprestimo(lvr1.getIdLivro(), usr2.getidUsuario());
-    // sistema.processaEmprestimo(lvr2.getIdLivro(), usr2.getidUsuario());
-    // sistema.processaEmprestimo(lvr3.getIdLivro(), usr2.getidUsuario());
-    // sistema.processaEmprestimo(lvr4.getIdLivro(), usr2.getidUsuario());
-    // sistema.processaEmprestimo(lvr5.getIdLivro(), usr2.getidUsuario());
+    // sistema.processaEmprestimo(lvr1.getIdLivro(), usr2.getIdUsuario());
+    // sistema.processaEmprestimo(lvr1.getIdLivro(), usr2.getIdUsuario());
+    // sistema.processaEmprestimo(lvr2.getIdLivro(), usr2.getIdUsuario());
+    // sistema.processaEmprestimo(lvr3.getIdLivro(), usr2.getIdUsuario());
+    // sistema.processaEmprestimo(lvr4.getIdLivro(), usr2.getIdUsuario());
+    sistema.processaEmprestimo(lvr5.getIdLivro(), usr3.getIdUsuario());
+    
 
-    sistema.processaReserva(lvr1.getIdLivro(), usr3.getidUsuario());
-    sistema.processaReserva(lvr2.getIdLivro(), usr3.getidUsuario());
-    sistema.processaReserva(lvr3.getIdLivro(), usr3.getidUsuario());
-    sistema.processaReserva(lvr4.getIdLivro(), usr3.getidUsuario());
+    // sistema.processaReserva(lvr1.getIdLivro(), usr3.getIdUsuario());
+    // sistema.processaReserva(lvr2.getIdLivro(), usr3.getIdUsuario());
+    // sistema.processaReserva(lvr3.getIdLivro(), usr3.getIdUsuario());
+    
+    sistema.processaReserva(lvr5.getIdLivro(), usr1.getIdUsuario());
+    sistema.processaEmprestimo(lvr5.getIdLivro(), usr2.getIdUsuario());
 
-    sistema.processaEmprestimo(lvr1.getIdLivro(), usr3.getidUsuario());
+    // sistema.processaEmprestimo(lvr1.getIdLivro(), usr3.getIdUsuario());
 
-    sistema.processaDevolucao(lvr1.getIdLivro(), usr3.getidUsuario());
+    // sistema.processaDevolucao(lvr1.getIdLivro(), usr3.getIdUsuario());
 
-    sistema.processaDevolucao(lvr1.getIdLivro(), usr3.getidUsuario());
+    // sistema.processaDevolucao(lvr1.getIdLivro(), usr3.getIdUsuario());
 
-    // sistema.processaDevolucao(lvr1.getIdLivro(), usr3.getidUsuario());
+    sistema.consultaLivro(lvr5.getIdLivro());
 
-    // sistema.processaEmprestimo(lvr1.getIdLivro(), usr3.getidUsuario());
+    // sistema.processaDevolucao(lvr1.getIdLivro(), usr3.getIdUsuario());
 
-    // sistema.processaReserva(lvr1.getIdLivro(), usr3.getidUsuario());
+    // sistema.processaEmprestimo(lvr1.getIdLivro(), usr3.getIdUsuario());
 
-    // sistema.processaEmprestimo(lvr1.getIdLivro(), usr3.getidUsuario());
+    // sistema.processaReserva(lvr1.getIdLivro(), usr3.getIdUsuario());
 
-    // sistema.processaEmprestimo(lvr1.getIdLivro(), usr3.getidUsuario());
+    // sistema.processaEmprestimo(lvr1.getIdLivro(), usr3.getIdUsuario());
 
-    // sistema.processaReserva(lvr1.getIdLivro(), usr3.getidUsuario());
+    // sistema.processaEmprestimo(lvr1.getIdLivro(), usr3.getIdUsuario());
+
+    // sistema.processaReserva(lvr1.getIdLivro(), usr3.getIdUsuario());
 
     System.out.println("Hello world");
   }

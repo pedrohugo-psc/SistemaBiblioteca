@@ -9,4 +9,10 @@ public interface IEmprestimo {
     public LocalDate getData();
 
     public Exemplar getExemplar();
+
+    public int getIdExemplarEmprestimo();
+
+    public String getNomeUsuarioEmprestimo();
+
+    public LocalDate getDataPrevistaEmprestimo();
 }

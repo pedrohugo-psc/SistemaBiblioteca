@@ -29,4 +29,14 @@ public class Exemplar {
         this.status = statusNovo;
     }
 
+    public String getTituloExemplar(){
+        return livro.getTitulo();
+    }
+
+    public String getNomeStatus(){
+        if(status == Status.StatusEnum.DISPONIVEL) return "Disponivel";
+        else if(status == Status.StatusEnum.RESERVADO) return "Reservado";
+        else return "Emprestado";
+    }
+
 }

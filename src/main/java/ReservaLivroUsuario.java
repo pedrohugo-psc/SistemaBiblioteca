@@ -17,10 +17,15 @@ public class ReservaLivroUsuario{
   }
 
   public int getIdUsarioReserva(){
-    return usuario.getidUsuario();
+    return usuario.getIdUsuario();
   }
 
   public int getIdLivroReserva(){
     return exemplar.getIdLivro();
   }
+
+  public String getNomeReserva(){
+    return usuario.getNome();
+  }
+  
 }

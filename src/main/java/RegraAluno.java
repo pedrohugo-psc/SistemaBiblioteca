@@ -216,4 +216,10 @@ public class RegraAluno implements IRegra{
         return this;
     }
 
+    public LocalDate DataPrevistaDevolucao(LocalDate dataEmprestimo){
+        LocalDate dataPrevistaDevolucao = dataEmprestimo.plusDays(3);
+
+        return dataPrevistaDevolucao;
+    }
+ 
 }

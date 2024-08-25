@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.ArrayList;
 
 public class Biblioteca{
 
@@ -13,25 +14,23 @@ public class Biblioteca{
     }
 
     public boolean buscaStatusDisponivel(int idLivro){
-        boolean resultado = false;
 
         for (Exemplar exemplar : exemplares) {
             if ((exemplar.getIdLivro() == idLivro) && exemplar.getStatus() == Status.StatusEnum.DISPONIVEL) {
-                resultado =  true;
+                return true;
             }
         }
-        return resultado;
+        return false;
     }
 
     public Exemplar buscaExemplar(int codigoLivro){
-        Exemplar exemplarEncontrado = null;
         
         for(Exemplar exemplar: exemplares){
             if(exemplar.getIdLivro() == codigoLivro){
-                    exemplarEncontrado =  exemplar;
+                return exemplar;
             }
         }
-		return exemplarEncontrado;
+		return null;
     }
 
     public void setExemplarBibliotecaEmprestado(Exemplar exemplar){
@@ -43,25 +42,36 @@ public class Biblioteca{
     }
 
     public Exemplar getExemplarDisponivel(int codigoLivro){
-        Exemplar exemplar = buscaExemplar(codigoLivro);
+
+        for(Exemplar exemplar: exemplares){
+            if((exemplar.getIdLivro() == codigoLivro) && ((exemplar.getStatus() == Status.StatusEnum.DISPONIVEL))){
+                return exemplar;
+            }
+        }
         
-        if(exemplar != null) {
-            if((exemplar.getStatus() == Status.StatusEnum.DISPONIVEL)){
+        return null;
+    }
+
+    public Exemplar getExemplarReservado(int codigoLivro){
+
+        for(Exemplar exemplar: exemplares){
+            if((exemplar.getIdLivro() == codigoLivro) && ((exemplar.getStatus() == Status.StatusEnum.RESERVADO))){
                 return exemplar;
             }
         }
         return null;
     }
 
-    public Exemplar getExemplarReservado(int codigoLivro){
-        Exemplar exemplar = buscaExemplar(codigoLivro);
+    public List<Exemplar> getExemplaresLivro(int codigoLivro){
+        List<Exemplar> exemplaresLivro = new ArrayList<>();
 
-        if(exemplar != null) {
-            if((exemplar.getStatus() == Status.StatusEnum.RESERVADO)){
-                return exemplar;
+        for(Exemplar exemplar: exemplares){
+            if(exemplar.getIdLivro() == codigoLivro){
+                exemplaresLivro.add(exemplar);
             }
         }
-        return null;
+        
+        return exemplaresLivro;
     }
     
 

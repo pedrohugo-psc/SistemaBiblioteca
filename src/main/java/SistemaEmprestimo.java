@@ -6,6 +6,7 @@ public class SistemaEmprestimo {
 
     private Biblioteca biblioteca;
     private IRegra regra;
+    private Historico historico;
     private List<IEmprestimo> emprestimos;
     private List<ReservaLivroUsuario> reservas;
     private List<Usuario> usuarios;
@@ -13,16 +14,16 @@ public class SistemaEmprestimo {
     public SistemaEmprestimo(Biblioteca biblioteca, List<Usuario> usuarios){
         this.biblioteca = biblioteca;
         this.usuarios = usuarios;
+        this.historico = new Historico();
         this.emprestimos = new ArrayList<>();
         this.reservas = new ArrayList<>();
-        
     }
 
     private Usuario buscaUsario(int idUsuario){
         
         Usuario usuarioEncontrado = null;
         for(Usuario usuario: usuarios){
-            if(usuario.getidUsuario() == idUsuario){
+            if(usuario.getIdUsuario() == idUsuario){
                 usuarioEncontrado = usuario;
             }
         }
@@ -32,7 +33,7 @@ public class SistemaEmprestimo {
     private void buscaRegra(int codigoUsuario){
 
         for (Usuario usuario : usuarios) {
-            if (usuario.getidUsuario() == codigoUsuario) {
+            if (usuario.getIdUsuario() == codigoUsuario) {
                 regra = usuario.getRegraUsuario();
             }
         }
@@ -43,6 +44,18 @@ public class SistemaEmprestimo {
         
         for(IEmprestimo emprestimoAtual: emprestimos){
             if(emprestimoAtual.getIdLivro() == codigoLivro && emprestimoAtual.getIdUsuario() == codigoUsuario){
+                emprestimo = emprestimoAtual;
+            }
+        }
+
+        return emprestimo;
+    }
+
+    private IEmprestimo buscaEmprestimoLivro(Exemplar exemplar){
+        IEmprestimo emprestimo = null;
+
+        for(IEmprestimo emprestimoAtual: emprestimos){
+            if(emprestimoAtual.getIdExemplarEmprestimo() == exemplar.getCodigoExemplar()){
                 emprestimo = emprestimoAtual;
             }
         }
@@ -64,6 +77,20 @@ public class SistemaEmprestimo {
         
     }
 
+    private List<ReservaLivroUsuario> buscaReservasLivro(int codigoLivro)
+    {
+        List<ReservaLivroUsuario> reservasLivro = new ArrayList<>();
+
+        for(ReservaLivroUsuario reserva: reservas){
+
+            if(reserva.getIdLivroReserva() == codigoLivro){
+                reservasLivro.add(reserva);
+            }
+        }
+
+        return reservasLivro;
+    }
+
     private int buscaQtdReserva(int codigoUsuario){
         int resultado = 0;
         
@@ -79,21 +106,21 @@ public class SistemaEmprestimo {
 
         if(resultado == true){
             Exemplar exemplarDisponivel = biblioteca.getExemplarDisponivel(codigoLivro);
+            IEmprestimo emprestimo = null;
 
             if(exemplarDisponivel == null){
                 ReservaLivroUsuario reserva = buscaReserva(codigoLivro, codigoUsuario);
                 Exemplar exemplarReserva = reserva.getExemplar();
-                 
-                IEmprestimo emprestimo = new Emprestimo(codigoLivro, codigoUsuario, exemplarReserva);
+                emprestimo = new Emprestimo( exemplarReserva, buscaUsario(codigoUsuario));
                 emprestimos.add(emprestimo);
                 reservas.remove(reserva);
                 biblioteca.setExemplarBibliotecaEmprestado(exemplarReserva);
             }else{
-                IEmprestimo emprestimo = new Emprestimo(codigoLivro, codigoUsuario, exemplarDisponivel);
+                emprestimo = new Emprestimo(exemplarDisponivel, buscaUsario(codigoUsuario));
                 emprestimos.add(emprestimo);
                 biblioteca.setExemplarBibliotecaEmprestado(exemplarDisponivel);
             }
-            
+            historico.setHistoricoEmprestimo(emprestimo);
             System.out.println("Emprestimo realizado com sucesso!");
         }else{
             
@@ -141,14 +168,30 @@ public class SistemaEmprestimo {
     }
 
     public void consultaLivro(int codigoLivro){
-        Exemplar exemplar = biblioteca.getExemplarBiblioteca(codigoLivro);
+
+        List<Exemplar> exemplaresLivro = biblioteca.getExemplaresLivro(codigoLivro);
+        List<ReservaLivroUsuario> reservasLivro = buscaReservasLivro(codigoLivro);
+
+        for(Exemplar exemplar: exemplaresLivro){
+            System.out.println("Título: " + exemplar.getTituloExemplar() + ", Codigo Exemplar: " + exemplar.getCodigoExemplar() + ", Status: " + exemplar.getNomeStatus());
+            if(exemplar.getStatus() == Status.StatusEnum.EMPRESTADO){
+                IEmprestimo emprestimo = buscaEmprestimoLivro(exemplar);
+
+                System.out.println("Emprestado para: " + emprestimo.getNomeUsuarioEmprestimo() + ", Data Emprestimo: " + emprestimo.getData() + ", Data Prevista de Devolucao " + emprestimo.getDataPrevistaEmprestimo());
+            }
+        }
+        if(!reservasLivro.isEmpty()){
+            for(ReservaLivroUsuario reserva: reservasLivro){
+                if(reserva.getIdLivroReserva() == codigoLivro){
+                    System.out.println("Nome do Usario da Reserva: " + reserva.getNomeReserva());
+                }
+            }
+        }
+        
     }
 
-
     public Biblioteca getBiblioteca(){
-
         return biblioteca;
-
     }
 
     public List<IEmprestimo> getEmprestimos(){

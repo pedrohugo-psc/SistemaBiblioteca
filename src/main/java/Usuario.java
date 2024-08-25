@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Usuario {
     private String nome;
     private int idUsuario;
@@ -9,7 +11,7 @@ public class Usuario {
         this.tipoUsuario = tipoUsuario;
     }
 
-    public int getidUsuario() {
+    public int getIdUsuario() {
         return this.idUsuario;
     }
 
@@ -21,7 +23,19 @@ public class Usuario {
         return this.tipoUsuario;
     }
 
+    public int getIdTipoUsario(){
+        return this.tipoUsuario.getTipoUsuario();
+    }
+
     public IRegra getRegraUsuario(){
         return this.tipoUsuario.getRegraTipoUsuario();
+    }
+
+    public void setDataPrevistaUsuario(LocalDate dataEmprestimo){
+       this.tipoUsuario.setDataPrevistaDevolucao(dataEmprestimo);
+    }
+
+    public LocalDate getDataPrevistaUsuario(){
+        return this.tipoUsuario.getDataPrevistaDevolucao();
     }
 }
