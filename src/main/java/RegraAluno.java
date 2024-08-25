@@ -32,7 +32,7 @@ public class RegraAluno implements IRegra{
             }
         }
 
-        if (numEmprestimo > 3) {
+        if (numEmprestimo > 2) {
             resultado = false;
         }
 

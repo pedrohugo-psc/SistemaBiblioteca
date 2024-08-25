@@ -31,9 +31,19 @@ public class RegraProfessor implements IRegra{
         return resultado;
     }
 
-    public boolean verificaDisponibilidade(int codigoLivro){
+    public boolean buscaReservaUsarioLivro(int codigoLivro, int codigoUsuario){
+        boolean resultado = false;
 
-        boolean resultado = biblioteca.buscaStatusDisponivel(codigoLivro);
+        for(ReservaLivroUsuario reserva : reservas){
+            if(reserva.getIdLivroReserva() == codigoLivro && reserva.getIdUsarioReserva() == codigoUsuario) resultado = true;
+        }
+
+        return resultado;
+    }
+
+    public boolean verificaDisponibilidade(int codigoLivro, int codigoUsuario){
+
+        boolean resultado = (biblioteca.buscaStatusDisponivel(codigoLivro) || buscaReservaUsarioLivro(codigoLivro, codigoUsuario));
 
         return resultado;
     }
@@ -51,7 +61,7 @@ public class RegraProfessor implements IRegra{
         setBiblioteca(biblioteca);
         setListaReserva(reservas);
 
-        if(!verificaDisponibilidade(codigoLivro)) return false;
+        if(!verificaDisponibilidade(codigoLivro, codigoUsuario)) return false;
 
         if(!verificaDevedor(date, codigoUsuario)) return false;
         

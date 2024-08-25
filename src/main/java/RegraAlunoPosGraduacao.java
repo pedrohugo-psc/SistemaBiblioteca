@@ -20,7 +20,7 @@ public class RegraAlunoPosGraduacao implements IRegra{
         this.reservas = reservas;
     }
 
-    public boolean buscanNumeroEmprestimoUsuario(int codigoUsuario)
+    public boolean buscaNumeroEmprestimoUsuario(int codigoUsuario)
     {
         int numEmprestimo = 0;
         boolean resultado = true;
@@ -31,7 +31,7 @@ public class RegraAlunoPosGraduacao implements IRegra{
             }
         }
 
-        if (numEmprestimo > 4) {
+        if (numEmprestimo > 3) {
             resultado = false;
         }
 
@@ -131,9 +131,19 @@ public class RegraAlunoPosGraduacao implements IRegra{
             return resultado;
     }
 
-    public boolean verificaDisponibilidade(int codigoLivro){
+    public boolean buscaReservaUsarioLivro(int codigoLivro, int codigoUsuario){
+        boolean resultado = false;
 
-        boolean resultado = biblioteca.buscaStatusDisponivel(codigoLivro);
+        for(ReservaLivroUsuario reserva : reservas){
+            if(reserva.getIdLivroReserva() == codigoLivro && reserva.getIdUsarioReserva() == codigoUsuario) resultado = true;
+        }
+
+        return resultado;
+    }
+
+    public boolean verificaDisponibilidade(int codigoLivro, int codigoUsuario){
+
+        boolean resultado = (biblioteca.buscaStatusDisponivel(codigoLivro) || buscaReservaUsarioLivro(codigoLivro, codigoUsuario));
 
         return resultado;
     }
@@ -147,7 +157,7 @@ public class RegraAlunoPosGraduacao implements IRegra{
     }
 
     public boolean verficarLimiteEmprestimo(int codigoUsuario){
-        boolean resultado = buscanNumeroEmprestimoUsuario(codigoUsuario);
+        boolean resultado = buscaNumeroEmprestimoUsuario(codigoUsuario);
 
         return resultado;
     }
@@ -172,6 +182,8 @@ public class RegraAlunoPosGraduacao implements IRegra{
 
         if(buscaAlgumaReservaUsuario(codigoUsuario)){
             resultado = (qtdExemplaresReservados >= qtdExemplares);
+        }else{
+            resultado = true;
         }
 
         return resultado;
@@ -190,26 +202,17 @@ public class RegraAlunoPosGraduacao implements IRegra{
         setBiblioteca(biblioteca);
         setListaReserva(reservas);
 
-        if(!verificaDisponibilidade(codigoLivro)) return false;
-
+        if(!verificaDisponibilidade(codigoLivro, codigoUsuario)) return false;
         if(!verificaDevedor(date, codigoUsuario)) return false;
-
         if(!verficarLimiteEmprestimo(codigoUsuario)) return false;
-
         if(!verificarMenoresExemplaresDisponiveisParaNaoReservantes(codigoLivro, codigoUsuario)) return false;
-
         if(!verficarQtdReversasMaiorIgualExemplaresUsarioReservou(codigoLivro, codigoUsuario)) return false;
-
         if(!verificarUsarioEmprestimoIgual(codigoLivro, codigoUsuario)) return false;
-
         return true;
     }
 
     public IRegra getRegra(){
         return this;
     }
-    
-	
-
 
 }

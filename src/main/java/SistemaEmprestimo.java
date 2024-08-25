@@ -125,7 +125,7 @@ public class SistemaEmprestimo {
     }
 
     public void processaReserva(int codigoLivro, int codigoUsuario){
-        if(buscaQtdReserva(codigoUsuario) <= 3){
+        if(buscaQtdReserva(codigoUsuario) <= 2){
             Exemplar exemplar = biblioteca.getExemplarDisponivel(codigoLivro);
             Usuario usuario = buscaUsario(codigoUsuario);
             if(exemplar != null && usuario != null){
@@ -138,6 +138,10 @@ public class SistemaEmprestimo {
         }else{
             System.out.println("Reserva não realizada!");
         }
+    }
+
+    public void consultaLivro(int codigoLivro){
+        Exemplar exemplar = biblioteca.getExemplarBiblioteca(codigoLivro);
     }
 
 
