@@ -27,5 +27,9 @@ public class ReservaLivroUsuario{
   public String getNomeReserva(){
     return usuario.getNome();
   }
+
+  public String getTituloReserva(){
+    return exemplar.getTituloExemplar();
+  }
   
 }

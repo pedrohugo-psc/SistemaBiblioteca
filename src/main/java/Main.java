@@ -67,8 +67,9 @@ public class Main {
     // sistema.processaReserva(lvr2.getIdLivro(), usr3.getIdUsuario());
     // sistema.processaReserva(lvr3.getIdLivro(), usr3.getIdUsuario());
     
-    sistema.processaReserva(lvr5.getIdLivro(), usr1.getIdUsuario());
+    // sistema.processaReserva(lvr5.getIdLivro(), usr1.getIdUsuario());
     sistema.processaEmprestimo(lvr5.getIdLivro(), usr2.getIdUsuario());
+    sistema.processaDevolucao(lvr5.getIdLivro(), usr2.getIdUsuario());
 
     // sistema.processaEmprestimo(lvr1.getIdLivro(), usr3.getIdUsuario());
 
@@ -77,6 +78,8 @@ public class Main {
     // sistema.processaDevolucao(lvr1.getIdLivro(), usr3.getIdUsuario());
 
     sistema.consultaLivro(lvr5.getIdLivro());
+
+    sistema.consultaHistorico(usr2.getIdUsuario());
 
     // sistema.processaDevolucao(lvr1.getIdLivro(), usr3.getIdUsuario());
 

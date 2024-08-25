@@ -4,40 +4,42 @@ import java.util.List;
 
 public class Historico{
   
-  private List<IEmprestimo> historico_emprestimos;
-  private List<ReservaLivroUsuario> historico_reservas;
-  private List<LocalDate>data_emprestimos;
-  private List<LocalDate>data_reservas;
-  private List<Status.StatusEnum>status_emprestimos;
+  HistoricoEmprestimos registro_emprestimo;
+  HistoricoReserva registro_reserva;
 
   public Historico(){
-    this.historico_emprestimos = new ArrayList<>();
-    this.historico_reservas = new ArrayList<>();
-    this.data_emprestimos = new ArrayList<>();
-    this.data_reservas = new ArrayList<>();
-    this.status_emprestimos = new ArrayList<>();
+    this.registro_emprestimo = new HistoricoEmprestimos();
+    this.registro_reserva = new HistoricoReserva();
   }
 
-  public void setHistoricoEmprestimo(IEmprestimo emprestimo){
-    Status.StatusEnum status = Status.StatusEnum.EM_CURSO;
-    this.historico_emprestimos.add(emprestimo);
-    this.data_emprestimos.add(emprestimo.getData());
-    this.status_emprestimos.add(status);
+  public void setRegistroEmprestimos(IEmprestimo emprestimo){
+
+    registro_emprestimo.setHistoricoEmprestimo(emprestimo);
+    
   }
 
-  public void setHistoricoDevolucao(IEmprestimo emprestimo){
-    LocalDate data_devolucao = LocalDate.now();
-    Status.StatusEnum status = Status.StatusEnum.FINALIZADO;
-    this.historico_emprestimos.add(emprestimo);
-    this.data_emprestimos.add(data_devolucao);
-    this.status_emprestimos.add(status);
+  public void setRegistroDevolucao(IEmprestimo emprestimo){
+
+    registro_emprestimo.setHistoricoDevolucao(emprestimo);
+    
   }
 
-  public void setHistoricoReserva(ReservaLivroUsuario reserva){
-    LocalDate data_reserva = LocalDate.now();
-    this.historico_reservas.add(reserva);
-    this.data_reservas.add(data_reserva);
+  public void setRegistroReserva(ReservaLivroUsuario reserva){
+      registro_reserva.setHistoricoReserva(reserva);
   }
+
+  public void getInformaHistoricoEmprestimoUsuario(int codigoUsuario){
+
+    registro_emprestimo.informaHistoricoEmprestimoUsuario(codigoUsuario);
+    
+  }
+
+  public void getInformaHistoricoReservaUsuario(int codigoUsuario){
+
+      registro_reserva.informaHistoricoReservaUsuario(codigoUsuario);
+
+  }
+
   
   
 }

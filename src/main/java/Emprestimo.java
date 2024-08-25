@@ -2,8 +2,6 @@ import java.time.LocalDate;
 
 public class Emprestimo implements IEmprestimo{
 
-     private  int idLivro;
-     private  int idUsuario;
      private  Exemplar exemplar;
      private  Usuario usuario;
      private  LocalDate data;
@@ -49,6 +47,10 @@ public class Emprestimo implements IEmprestimo{
 
      public Status.StatusEnum getStatusEmprestimo(){
           return exemplar.getStatus();
+     }
+
+     public String getTituloEmprestimo(){
+          return exemplar.getTituloExemplar();
      }
 
 }

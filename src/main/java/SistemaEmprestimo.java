@@ -120,7 +120,7 @@ public class SistemaEmprestimo {
                 emprestimos.add(emprestimo);
                 biblioteca.setExemplarBibliotecaEmprestado(exemplarDisponivel);
             }
-            historico.setHistoricoEmprestimo(emprestimo);
+            historico.setRegistroEmprestimos(emprestimo);
             System.out.println("Emprestimo realizado com sucesso!");
         }else{
             
@@ -145,6 +145,7 @@ public class SistemaEmprestimo {
         if(emprestimo != null){
             biblioteca.setExemplarBibliotecaDisponivel(emprestimo.getExemplar());
             emprestimos.remove(emprestimo);
+            historico.setRegistroDevolucao(emprestimo);
             System.out.println("Devolução realizada com sucesso!");
         }else{
             System.out.println("Devolução não realizada!");
@@ -158,6 +159,7 @@ public class SistemaEmprestimo {
             if(exemplar != null && usuario != null){
                 ReservaLivroUsuario reserva = new ReservaLivroUsuario(exemplar, usuario);
                 reservas.add(reserva);
+                historico.setRegistroReserva(reserva);
                 System.out.println("Reserva realizada com sucesso!");
             }else{
                 System.out.println("Reserva não realizada!");
@@ -187,6 +189,13 @@ public class SistemaEmprestimo {
                 }
             }
         }
+        
+    }
+
+    public void consultaHistorico(int codigoUsuario){
+
+        historico.getInformaHistoricoEmprestimoUsuario(codigoUsuario);
+        historico.getInformaHistoricoReservaUsuario(codigoUsuario);
         
     }
 

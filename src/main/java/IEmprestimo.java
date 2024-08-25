@@ -15,4 +15,6 @@ public interface IEmprestimo {
     public String getNomeUsuarioEmprestimo();
 
     public LocalDate getDataPrevistaEmprestimo();
+
+    public String getTituloEmprestimo();
 }
