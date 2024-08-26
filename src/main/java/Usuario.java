@@ -38,4 +38,13 @@ public class Usuario {
     public LocalDate getDataPrevistaUsuario(){
         return this.tipoUsuario.getDataPrevistaDevolucao();
     }
+
+    public Observador criaObservadorUsario(){
+        return this.tipoUsuario.criaObservador();
+    }
+
+    public Observador getObservadorUsuario(){
+        return this.tipoUsuario.getObservador();
+    }
+    
 }

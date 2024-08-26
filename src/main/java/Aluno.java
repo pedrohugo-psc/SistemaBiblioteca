@@ -31,4 +31,13 @@ public class Aluno implements TipoUsuario{
         this.dataPrevistaDevolucao = dataPrevista.getDataPrevista();
     }
 
+    public Observador criaObservador(){
+        System.out.println("Nao eh possivel criar observador para um aluno");
+        return null;
+    }
+
+    public Observador getObservador(){
+        return null;
+    }
+
 }

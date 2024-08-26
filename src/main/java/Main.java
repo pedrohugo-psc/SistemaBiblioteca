@@ -60,7 +60,7 @@ public class Main {
     // sistema.processaEmprestimo(lvr2.getIdLivro(), usr2.getIdUsuario());
     // sistema.processaEmprestimo(lvr3.getIdLivro(), usr2.getIdUsuario());
     // sistema.processaEmprestimo(lvr4.getIdLivro(), usr2.getIdUsuario());
-    sistema.processaEmprestimo(lvr5.getIdLivro(), usr3.getIdUsuario());
+    // sistema.processaEmprestimo(lvr5.getIdLivro(), usr3.getIdUsuario());
     
 
     // sistema.processaReserva(lvr1.getIdLivro(), usr3.getIdUsuario());
@@ -68,8 +68,8 @@ public class Main {
     // sistema.processaReserva(lvr3.getIdLivro(), usr3.getIdUsuario());
     
     // sistema.processaReserva(lvr5.getIdLivro(), usr1.getIdUsuario());
-    sistema.processaEmprestimo(lvr5.getIdLivro(), usr2.getIdUsuario());
-    sistema.processaDevolucao(lvr5.getIdLivro(), usr2.getIdUsuario());
+    sistema.processaReserva(lvr5.getIdLivro(), usr1.getIdUsuario());
+    sistema.processaReserva(lvr5.getIdLivro(), usr3.getIdUsuario());
 
     // sistema.processaEmprestimo(lvr1.getIdLivro(), usr3.getIdUsuario());
 
@@ -81,6 +81,10 @@ public class Main {
 
     sistema.consultaHistorico(usr2.getIdUsuario());
 
+    sistema.processaObervador(lvr5.getIdLivro(), usr2.getIdUsuario());
+    
+    sistema.consultaQtdNotificacao(usr2.getIdUsuario());
+    
     // sistema.processaDevolucao(lvr1.getIdLivro(), usr3.getIdUsuario());
 
     // sistema.processaEmprestimo(lvr1.getIdLivro(), usr3.getIdUsuario());
@@ -96,8 +100,4 @@ public class Main {
     System.out.println("Hello world");
   }
 
-  // @Test
-  // void addition() {
-  //     assertEquals(2, 1 + 1);
-  // }
 }

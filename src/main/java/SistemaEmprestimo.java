@@ -10,6 +10,7 @@ public class SistemaEmprestimo {
     private List<IEmprestimo> emprestimos;
     private List<ReservaLivroUsuario> reservas;
     private List<Usuario> usuarios;
+    ObservaLivro observaLivro;
 
     public SistemaEmprestimo(Biblioteca biblioteca, List<Usuario> usuarios){
         this.biblioteca = biblioteca;
@@ -169,6 +170,16 @@ public class SistemaEmprestimo {
         }
     }
 
+    public void processaObervador(int codigoLivro, int codigoUsuario){
+        Usuario usuario = buscaUsario(codigoUsuario);
+        Observador observadorAtual = usuario.criaObservadorUsario();
+        if(observadorAtual != null){
+            observaLivro = new ObservaLivro(reservas);
+            observaLivro.registraObservador(observadorAtual);
+            observaLivro.verificaReservaSimultaneas(codigoLivro);
+        }
+    }
+
     public void consultaLivro(int codigoLivro){
 
         List<Exemplar> exemplaresLivro = biblioteca.getExemplaresLivro(codigoLivro);
@@ -199,12 +210,13 @@ public class SistemaEmprestimo {
         
     }
 
-    public Biblioteca getBiblioteca(){
-        return biblioteca;
-    }
-
-    public List<IEmprestimo> getEmprestimos(){
-        return emprestimos;
+    public void consultaQtdNotificacao(int codigoUsuario){
+        Usuario usuario = buscaUsario(codigoUsuario);
+        Observador observadorAtual = usuario.getObservadorUsuario();
+        
+        if(observadorAtual != null){
+            observadorAtual.display();
+        } 
     }
 
 }

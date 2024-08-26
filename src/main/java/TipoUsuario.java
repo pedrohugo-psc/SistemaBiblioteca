@@ -7,5 +7,7 @@ public interface TipoUsuario {
     public int getTipoUsuario();
     public LocalDate getDataPrevistaDevolucao();
     public void setDataPrevistaDevolucao(LocalDate dataEmprestimo);
+    public Observador criaObservador();
+    public Observador getObservador();
 
 }
