@@ -1,7 +1,5 @@
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;
 
 // import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -49,11 +47,16 @@ public class Main {
 
     Biblioteca biblioteca = new Biblioteca(exemplares);
 
-    // IEmprestimo emprestimo = new Emprestimo(lvr1.getIdLivro(),usr1.getIdUsuario(), exp);
+    SistemaEmprestimo sistema = SistemaEmprestimo.getInstancia();
 
-    SistemaEmprestimo sistema = new SistemaEmprestimo(biblioteca, usuarios);
+    sistema.insereDadosIniciais(biblioteca, usuarios);
 
-    LocalDate dataAtual = LocalDate.now();
+    GerenciadorComandos gerencia = new GerenciadorComandos();
+		gerencia.getComando();
+
+    // SistemaEmprestimo sistema = new SistemaEmprestimo(biblioteca, usuarios);
+
+    // LocalDate dataAtual = LocalDate.now();
 
     // sistema.processaEmprestimo(lvr1.getIdLivro(), usr2.getIdUsuario());
     // sistema.processaEmprestimo(lvr1.getIdLivro(), usr2.getIdUsuario());
@@ -68,8 +71,8 @@ public class Main {
     // sistema.processaReserva(lvr3.getIdLivro(), usr3.getIdUsuario());
     
     // sistema.processaReserva(lvr5.getIdLivro(), usr1.getIdUsuario());
-    sistema.processaReserva(lvr5.getIdLivro(), usr1.getIdUsuario());
-    sistema.processaReserva(lvr5.getIdLivro(), usr3.getIdUsuario());
+    // sistema.processaReserva(lvr5.getIdLivro(), usr1.getIdUsuario());
+    // sistema.processaReserva(lvr5.getIdLivro(), usr3.getIdUsuario());
 
     // sistema.processaEmprestimo(lvr1.getIdLivro(), usr3.getIdUsuario());
 
@@ -77,13 +80,13 @@ public class Main {
 
     // sistema.processaDevolucao(lvr1.getIdLivro(), usr3.getIdUsuario());
 
-    sistema.consultaLivro(lvr5.getIdLivro());
+    // sistema.consultaLivro(lvr5.getIdLivro());
 
-    sistema.consultaHistorico(usr2.getIdUsuario());
+    // sistema.consultaHistorico(usr2.getIdUsuario());
 
-    sistema.processaObervador(lvr5.getIdLivro(), usr2.getIdUsuario());
+    // sistema.processaObervador(lvr5.getIdLivro(), usr2.getIdUsuario());
     
-    sistema.consultaQtdNotificacao(usr2.getIdUsuario());
+    // sistema.consultaQtdNotificacao(usr2.getIdUsuario());
     
     // sistema.processaDevolucao(lvr1.getIdLivro(), usr3.getIdUsuario());
 
@@ -96,8 +99,6 @@ public class Main {
     // sistema.processaEmprestimo(lvr1.getIdLivro(), usr3.getIdUsuario());
 
     // sistema.processaReserva(lvr1.getIdLivro(), usr3.getIdUsuario());
-
-    System.out.println("Hello world");
   }
 
 }

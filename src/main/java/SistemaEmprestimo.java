@@ -1,9 +1,10 @@
-import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SistemaEmprestimo {
 
+    private static SistemaEmprestimo instancia;
     private Biblioteca biblioteca;
     private IRegra regra;
     private Historico historico;
@@ -12,12 +13,22 @@ public class SistemaEmprestimo {
     private List<Usuario> usuarios;
     ObservaLivro observaLivro;
 
-    public SistemaEmprestimo(Biblioteca biblioteca, List<Usuario> usuarios){
-        this.biblioteca = biblioteca;
-        this.usuarios = usuarios;
+    private SistemaEmprestimo(){
         this.historico = new Historico();
         this.emprestimos = new ArrayList<>();
         this.reservas = new ArrayList<>();
+    }
+
+    public static SistemaEmprestimo getInstancia() { 
+		
+        if(instancia == null) instancia = new SistemaEmprestimo();
+		
+		return instancia;
+	}
+
+    public void insereDadosIniciais(Biblioteca biblioteca, List<Usuario> usuarios){
+        this.biblioteca = biblioteca;
+        this.usuarios = usuarios;
     }
 
     private Usuario buscaUsario(int idUsuario){
@@ -218,5 +229,10 @@ public class SistemaEmprestimo {
             observadorAtual.display();
         } 
     }
+
+    public void sairDoSistema() {
+		System.out.println("Saindo do sistema de biblioteca");
+		System.exit(0);
+	}
 
 }
