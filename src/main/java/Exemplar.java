@@ -4,8 +4,8 @@ public class Exemplar {
     private int codigoExemplar;
     private Status.StatusEnum status;
 
-    public Exemplar(ILivro lvr1, int codigoExemplar, Status.StatusEnum disponivel){
-        this.livro = lvr1;
+    public Exemplar(ILivro livro, int codigoExemplar, Status.StatusEnum disponivel){
+        this.livro = livro;
         this.codigoExemplar = codigoExemplar;
         this.status = Status.StatusEnum.DISPONIVEL;
     }

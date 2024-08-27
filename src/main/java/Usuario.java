@@ -23,10 +23,6 @@ public class Usuario {
         return this.tipoUsuario;
     }
 
-    public int getIdTipoUsario(){
-        return this.tipoUsuario.getTipoUsuario();
-    }
-
     public IRegra getRegraUsuario(){
         return this.tipoUsuario.getRegraTipoUsuario();
     }

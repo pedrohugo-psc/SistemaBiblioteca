@@ -3,11 +3,10 @@ import java.time.LocalDate;
 public class AlunoPosGraduacao implements TipoUsuario{
 
     private static IRegra regra = new RegraAlunoPosGraduacao();
-    private int idTipoUsario;
     private LocalDate dataPrevistaDevolucao;
 
     public AlunoPosGraduacao(){
-        this.idTipoUsario = 2;
+        this.dataPrevistaDevolucao = null;
     }
     
     public TipoUsuario obterTipoUsuario() {
@@ -16,10 +15,6 @@ public class AlunoPosGraduacao implements TipoUsuario{
 
     public IRegra getRegraTipoUsuario(){
         return regra.getRegra();
-    }
-
-    public int getTipoUsuario(){
-        return idTipoUsario;
     }
 
     public LocalDate getDataPrevistaDevolucao(){
@@ -40,5 +35,5 @@ public class AlunoPosGraduacao implements TipoUsuario{
     public Observador getObservador(){
         return null;
     }
-
+    
 }
