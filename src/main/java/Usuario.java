@@ -1,5 +1,8 @@
 import java.time.LocalDate;
-
+/**
+ * Classe que representa um usuário no sistema de biblioteca.
+ * Cada usuário possui um nome, um ID único e um tipo de usuário (aluno, professor, etc.) que define suas regras e comportamentos específicos.
+ */
 public class Usuario {
     private String nome;
     private int idUsuario;

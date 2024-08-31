@@ -1,7 +1,13 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-
+/**
+ * Classe que implementa as regras de empréstimo específicas para professores.
+ * Define as condições e restrições para que um professor possa realizar um empréstimo.
+ * As principais diferenças em relação à regra de alunos são:
+ * - Não há limite de empréstimos simultâneos.
+ * - Prazo de devolução: 7 dias (em vez de 3 para alunos de graduação ou 5 para pós-graduação).
+ */
 public class RegraProfessor implements IRegra{
 
     List<IEmprestimo> emprestimos;

@@ -1,7 +1,13 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-
+/**
+ * Classe que implementa as regras de empréstimo específicas para alunos de pós-graduação.
+ * Define as condições e restrições para que um aluno de pós-graduação possa realizar um empréstimo.
+ * As principais diferenças em relação à regra de alunos de graduação são:
+ * - Limite de empréstimos: 4 (em vez de 3)
+ * - Prazo de devolução: 5 dias (em vez de 3)
+ */
 public class RegraAlunoPosGraduacao implements IRegra{
 
     List<IEmprestimo> emprestimos;
@@ -31,7 +37,7 @@ public class RegraAlunoPosGraduacao implements IRegra{
             }
         }
 
-        if (numEmprestimo > 3) {
+        if (numEmprestimo > 4) {
             resultado = false;
         }
 

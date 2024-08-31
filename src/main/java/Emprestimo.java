@@ -1,5 +1,9 @@
 import java.time.LocalDate;
 
+/**
+ * Classe que representa um empréstimo de um exemplar para um usuário.
+ * Implementa a interface IEmprestimo para definir as operações básicas de um empréstimo.
+ */
 public class Emprestimo implements IEmprestimo{
 
      private  Exemplar exemplar;

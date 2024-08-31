@@ -2,6 +2,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe que representa o histórico de reservas de livros de um sistema.
+ * Armazena informações sobre as reservas realizadas e suas respectivas datas.
+ * Permite registrar novas reservas e fornecer informações sobre o histórico de reservas de um usuário específico.
+ */
 public class HistoricoReserva{
 
   private List<ReservaLivroUsuario> historico_reservas;

@@ -1,3 +1,7 @@
+/**
+ * Classe que representa um exemplar de um livro em uma biblioteca.
+ * Contém informações sobre o livro associado, seu código único, status atual e métodos para gerenciá-los
+ */
 public class Exemplar {
 
     private ILivro livro;

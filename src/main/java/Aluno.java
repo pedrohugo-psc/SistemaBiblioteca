@@ -1,5 +1,10 @@
 import java.time.LocalDate;
 
+/**
+ * Classe que representa um Aluno dentro do sistema de biblioteca, implementando a interface TipoUsuario.
+ * Alunos possuem regras específicas para empréstimos e devoluções, definidas pela classe RegraAluno.
+ * Não é possível criar observadores para alunos, conforme indicado no método criaObservador.
+ */
 public class Aluno implements TipoUsuario{
 
     private static IRegra regra = new RegraAluno();

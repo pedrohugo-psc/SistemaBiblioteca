@@ -1,7 +1,12 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Classe que representa o sistema de empréstimo de uma biblioteca.
+ * Gerencia o processo de empréstimo, devolução e reserva de livros, 
+ * além de controlar notificações e consultas.
+ * Utiliza o padrão Singleton para garantir que haja apenas uma instância do sistema.
+ */
 public class SistemaEmprestimo {
 
     private static SistemaEmprestimo instancia;
@@ -181,7 +186,7 @@ public class SistemaEmprestimo {
         }
     }
 
-    public void processaObervador(int codigoLivro, int codigoUsuario){
+    public void processaObservador(int codigoLivro, int codigoUsuario){
         Usuario usuario = buscaUsario(codigoUsuario);
         Observador observadorAtual = usuario.criaObservadorUsario();
         if(observadorAtual != null){
@@ -231,7 +236,7 @@ public class SistemaEmprestimo {
     }
 
     public void sairDoSistema() {
-		System.out.println("Saindo do sistema de biblioteca");
+		System.out.println("Saindo do Sistema de Biblioteca");
 		System.exit(0);
 	}
 

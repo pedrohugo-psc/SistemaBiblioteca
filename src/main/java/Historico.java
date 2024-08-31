@@ -1,3 +1,10 @@
+/**
+ * Classe que representa o histórico de empréstimos e reservas de um usuário.
+ * Gerencia o registro de empréstimos e devoluções através de um HistoricoEmprestimos
+ * e o registro de reservas através de um HistoricoReserva.
+ * Permite adicionar novos registros de empréstimos, devoluções e reservas,
+ * além de fornecer informações sobre o histórico de empréstimos e reservas de um usuário específico.
+ */
 public class Historico{
   
   HistoricoEmprestimos registro_emprestimo;

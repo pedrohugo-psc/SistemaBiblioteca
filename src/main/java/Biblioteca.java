@@ -1,6 +1,10 @@
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * A classe `Biblioteca` representa uma biblioteca e gerencia uma coleção de exemplares de livros.
+ * Ela fornece métodos para buscar, verificar a disponibilidade, emprestar, devolver e reservar exemplares.
+ */
 public class Biblioteca{
 
     private List<Exemplar> exemplares;

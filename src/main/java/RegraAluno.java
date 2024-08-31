@@ -2,7 +2,10 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-
+/**
+ * Classe que implementa as regras de empréstimo específicas para alunos.
+ * Define as condições e restrições para que um aluno possa realizar um empréstimo.
+ */
 public class RegraAluno implements IRegra{
 
     List<IEmprestimo> emprestimos;
@@ -32,7 +35,7 @@ public class RegraAluno implements IRegra{
             }
         }
 
-        if (numEmprestimo > 2) {
+        if (numEmprestimo > 3) {
             resultado = false;
         }
 

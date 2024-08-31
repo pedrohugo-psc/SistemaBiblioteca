@@ -1,4 +1,8 @@
-
+/**
+ * Classe que implementa o comando de consulta de histórico de empréstimos de um usuário.
+ * Recebe o ID do usuário como parâmetro e delega a consulta ao SistemaEmprestimo.
+ * Em caso de parâmetros inválidos, exibe uma mensagem de erro.
+ */
 public class ComandoConsultaHistorico implements Comando{
 
     @Override

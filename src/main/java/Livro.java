@@ -1,5 +1,9 @@
 import java.util.List;
-
+/**
+ * Classe que representa um livro em um sistema de biblioteca.
+ * Implementa a interface ILivro para fornecer informações sobre o livro, como editora, autores,
+ * ano de publicação, título, edição e ID.
+ */
 public class Livro implements ILivro{
     private String editora;
     private List<String>autores;

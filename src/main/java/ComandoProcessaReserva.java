@@ -1,4 +1,8 @@
-
+/**
+ * Classe que implementa o comando de processamento de reserva de um livro.
+ * Recebe o ID do usuário e o ID do livro como parâmetros e delega o processamento ao SistemaEmprestimo.
+ * Em caso de parâmetros inválidos, exibe uma mensagem de erro.
+ */
 public class ComandoProcessaReserva implements Comando{
 
     @Override

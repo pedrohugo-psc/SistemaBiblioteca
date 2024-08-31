@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Classe que representa um livro sendo observado para notificar observadores sobre reservas simultâneas.
+ * Mantém uma lista de observadores e uma lista de reservas.
+ * Permite registrar observadores e notificá-los quando múltiplas reservas são feitas para o mesmo livro.
+ */
 public class ObservaLivro{
 
   private ArrayList<Observador> observadores;

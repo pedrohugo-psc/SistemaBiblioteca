@@ -1,5 +1,10 @@
 import java.time.LocalDate;
 
+/**
+ * Classe que representa um Aluno de Pós-Graduação dentro do sistema de biblioteca, implementando a interface TipoUsuario.
+ * Alunos de Pós-Graduação possuem regras específicas para empréstimos e devoluções, definidas pela classe RegraAlunoPosGraduacao.
+ * Assim como os alunos de graduação, não é possível criar observadores para alunos de pós-graduação.
+ */
 public class AlunoPosGraduacao implements TipoUsuario{
 
     private static IRegra regra = new RegraAlunoPosGraduacao();

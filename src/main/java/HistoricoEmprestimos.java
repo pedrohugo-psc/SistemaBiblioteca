@@ -2,6 +2,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe que representa o histórico de empréstimos de um sistema.
+ * Armazena informações sobre empréstimos realizados e suas respectivas datas e status.
+ * Permite registrar novos empréstimos e devoluções, além de fornecer informações sobre o histórico de um usuário específico.
+ */
 public class HistoricoEmprestimos{
 
   private List<IEmprestimo> historico_emprestimos;

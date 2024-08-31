@@ -1,3 +1,7 @@
+/**
+ * Classe que representa uma reserva de um livro por um usuário.
+ * Ao criar uma reserva, o status do exemplar é automaticamente alterado para "RESERVADO".
+ */
 public class ReservaLivroUsuario{
   Exemplar exemplar;
   Usuario usuario;
