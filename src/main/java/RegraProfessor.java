@@ -10,23 +10,8 @@ import java.util.List;
  */
 public class RegraProfessor implements IRegra{
 
-    List<IEmprestimo> emprestimos;
-    List<ReservaLivroUsuario> reservas;
-    Biblioteca biblioteca;
 
-    public void setListaEmprestimo(List<IEmprestimo> emprestimos){
-        this.emprestimos = emprestimos;
-    }
-
-    public void setBiblioteca(Biblioteca biblioteca){
-        this.biblioteca = biblioteca;
-    }
-
-    public void setListaReserva(List<ReservaLivroUsuario> reservas){
-        this.reservas = reservas;
-    }
-
-    public boolean buscaEmprestimoDataUsuario(LocalDate dataAtual, int codigoUsuario){
+    public boolean buscaEmprestimoDataUsuario(LocalDate dataAtual, int codigoUsuario, List<IEmprestimo> emprestimos){
         boolean resultado = true;
 
         for (IEmprestimo emprestimo : emprestimos) {
@@ -37,7 +22,7 @@ public class RegraProfessor implements IRegra{
         return resultado;
     }
 
-    public boolean buscaReservaUsarioLivro(int codigoLivro, int codigoUsuario){
+    public boolean buscaReservaUsarioLivro(int codigoLivro, int codigoUsuario, List<ReservaLivroUsuario> reservas){
         boolean resultado = false;
 
         for(ReservaLivroUsuario reserva : reservas){
@@ -47,29 +32,25 @@ public class RegraProfessor implements IRegra{
         return resultado;
     }
 
-    public boolean verificaDisponibilidade(int codigoLivro, int codigoUsuario){
+    public boolean verificaDisponibilidade(int codigoLivro, int codigoUsuario, Biblioteca biblioteca, List<ReservaLivroUsuario> reservas){
 
-        boolean resultado = (biblioteca.buscaStatusDisponivel(codigoLivro) || buscaReservaUsarioLivro(codigoLivro, codigoUsuario));
+        boolean resultado = (biblioteca.buscaStatusDisponivel(codigoLivro) || buscaReservaUsarioLivro(codigoLivro, codigoUsuario, reservas));
 
         return resultado;
     }
 
-    public boolean verificaDevedor(LocalDate date, int codigoUsuario){
+    public boolean verificaDevedor(LocalDate date, int codigoUsuario, List<IEmprestimo> emprestimos){
 
-        boolean resultado = buscaEmprestimoDataUsuario(date, codigoUsuario);
+        boolean resultado = buscaEmprestimoDataUsuario(date, codigoUsuario, emprestimos);
 
         return resultado;
-
     }
 
     public boolean checaEmprestimo(int codigoLivro, int codigoUsuario, LocalDate date, List<IEmprestimo> emprestimos, List<ReservaLivroUsuario> reservas, Biblioteca biblioteca) {
-        setListaEmprestimo(emprestimos);
-        setBiblioteca(biblioteca);
-        setListaReserva(reservas);
 
-        if(!verificaDisponibilidade(codigoLivro, codigoUsuario)) return false;
+        if(!verificaDisponibilidade(codigoLivro, codigoUsuario, biblioteca, reservas)) return false;
 
-        if(!verificaDevedor(date, codigoUsuario)) return false;
+        if(!verificaDevedor(date, codigoUsuario, emprestimos)) return false;
         
         
         return true;
@@ -78,14 +59,5 @@ public class RegraProfessor implements IRegra{
     public IRegra getRegra(){
         return this;
     }
-
-    public LocalDate DataPrevistaDevolucao(LocalDate dataEmprestimo){
-        LocalDate dataPrevistaDevolucao = dataEmprestimo.plusDays(7);
-
-        return dataPrevistaDevolucao;
-    }
-
-    
-	
 
 }

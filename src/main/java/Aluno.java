@@ -7,11 +7,12 @@ import java.time.LocalDate;
  */
 public class Aluno implements TipoUsuario{
 
-    private static IRegra regra = new RegraAluno();
-    private LocalDate dataPrevistaDevolucao;
+    private IRegra regra;
+    private IDataPrevista dataPrevistaDevolucao;
 
     public Aluno(){
-        this.dataPrevistaDevolucao = null;
+        this.regra = new RegraAluno();
+        this.dataPrevistaDevolucao = new DataPrevistaAluno();
     }
 
     public TipoUsuario obterTipoUsuario() {
@@ -23,12 +24,11 @@ public class Aluno implements TipoUsuario{
     }
 
     public LocalDate getDataPrevistaDevolucao(){
-        return dataPrevistaDevolucao;
+        return dataPrevistaDevolucao.getDataPrevista();
     }
 
     public void setDataPrevistaDevolucao(LocalDate dataEmprestimo){
-        IDataPrevista dataPrevista = new DataPrevistaAluno(dataEmprestimo);
-        this.dataPrevistaDevolucao = dataPrevista.getDataPrevista();
+        this.dataPrevistaDevolucao.setDataPrevista(dataEmprestimo);
     }
 
     public Observador criaObservador(){

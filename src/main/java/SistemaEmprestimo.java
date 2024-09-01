@@ -11,12 +11,11 @@ public class SistemaEmprestimo {
 
     private static SistemaEmprestimo instancia;
     private Biblioteca biblioteca;
-    private IRegra regra;
     private Historico historico;
     private List<IEmprestimo> emprestimos;
     private List<ReservaLivroUsuario> reservas;
     private List<Usuario> usuarios;
-    ObservaLivro observaLivro;
+    private ObservaLivro observaLivro;
 
     private SistemaEmprestimo(){
         this.historico = new Historico();
@@ -47,13 +46,17 @@ public class SistemaEmprestimo {
         return usuarioEncontrado;
     }
     
-    private void buscaRegra(int codigoUsuario){
+    private IRegra buscaRegra(int codigoUsuario){
+
+        IRegra regra = null;
 
         for (Usuario usuario : usuarios) {
             if (usuario.getIdUsuario() == codigoUsuario) {
                 regra = usuario.getRegraUsuario();
             }
         }
+
+        return regra;
     }
 
     private IEmprestimo buscaEmprestimo(int codigoLivro, int codigoUsuario){
@@ -148,11 +151,13 @@ public class SistemaEmprestimo {
 
     public void processaEmprestimo(int codigoLivro, int codigoUsuario){
 
-        buscaRegra(codigoUsuario);
-        
-        boolean resultado = regra.checaEmprestimo(codigoLivro,codigoUsuario, LocalDate.now(), emprestimos, reservas, biblioteca);
+        IRegra regra = buscaRegra(codigoUsuario);
 
-        setEmprestimo(resultado, codigoLivro, codigoUsuario);
+        if(regra != null){
+            boolean resultado = regra.checaEmprestimo(codigoLivro,codigoUsuario, LocalDate.now(), emprestimos, reservas, biblioteca);
+
+            setEmprestimo(resultado, codigoLivro, codigoUsuario);
+        }
             
     }
 
@@ -190,9 +195,9 @@ public class SistemaEmprestimo {
         Usuario usuario = buscaUsario(codigoUsuario);
         Observador observadorAtual = usuario.criaObservadorUsario();
         if(observadorAtual != null){
-            observaLivro = new ObservaLivro(reservas);
+            observaLivro = new ObservaLivro();
             observaLivro.registraObservador(observadorAtual);
-            observaLivro.verificaReservaSimultaneas(codigoLivro);
+            observaLivro.verificaReservaSimultaneas(codigoLivro,reservas);
         }
     }
 

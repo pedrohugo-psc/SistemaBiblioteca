@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class DataPrevistaAluno implements IDataPrevista{
   private LocalDate dataPrevista;
   
-  public DataPrevistaAluno(LocalDate dataEmprestimo){
+  public void setDataPrevista(LocalDate dataEmprestimo){
     this.dataPrevista = dataEmprestimo.plusDays(3);
   }
   

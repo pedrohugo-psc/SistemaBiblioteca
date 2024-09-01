@@ -8,23 +8,7 @@ import java.util.List;
  */
 public class RegraAluno implements IRegra{
 
-    List<IEmprestimo> emprestimos;
-    List<ReservaLivroUsuario> reservas;
-    Biblioteca biblioteca;
-
-    public void setListaEmprestimo(List<IEmprestimo> emprestimos){
-        this.emprestimos = emprestimos;
-    }
-
-    public void setBiblioteca(Biblioteca biblioteca){
-        this.biblioteca = biblioteca;
-    }
-
-    public void setListaReserva(List<ReservaLivroUsuario> reservas){
-        this.reservas = reservas;
-    }
-
-    public boolean buscaNumeroEmprestimoUsuario(int codigoUsuario)
+    public boolean buscaNumeroEmprestimoUsuario(int codigoUsuario, List<IEmprestimo> emprestimos)
     {
         int numEmprestimo = 0;
         boolean resultado = true;
@@ -42,7 +26,7 @@ public class RegraAluno implements IRegra{
         return resultado;
     } 
 
-    public boolean buscaEmprestimoDataUsuario(LocalDate dataAtual, int codigoUsuario){
+    public boolean buscaEmprestimoDataUsuario(LocalDate dataAtual, int codigoUsuario, List<IEmprestimo> emprestimos){
         boolean resultado = true;
 
         for (IEmprestimo emprestimo : emprestimos) {
@@ -53,7 +37,7 @@ public class RegraAluno implements IRegra{
         return resultado;
     }
 
-    public boolean buscaLivroSemReservaUsuario(int codigoLivro, int codigoUsuario){
+    public boolean buscaLivroSemReservaUsuario(int codigoLivro, int codigoUsuario, List<ReservaLivroUsuario> reservas){
         boolean resultado = true;
         
         for(ReservaLivroUsuario reserva : reservas){
@@ -64,7 +48,7 @@ public class RegraAluno implements IRegra{
         return resultado;
     }
 
-    public int buscaQtdReservasLivro(int codigoLivro){
+    public int buscaQtdReservasLivro(int codigoLivro, List<ReservaLivroUsuario> reservas){
         int qtdReservasLivro = 0;
 
         for(ReservaLivroUsuario reserva : reservas){
@@ -76,7 +60,7 @@ public class RegraAluno implements IRegra{
         return qtdReservasLivro;
     }
 
-    public int buscaQtdExemplarDisponivel(int codigoLivro){
+    public int buscaQtdExemplarDisponivel(int codigoLivro, Biblioteca biblioteca){
         int qtdExemplarDisponivel = 0;
 
         for(Exemplar exemplar : biblioteca.getExemplares()){
@@ -88,11 +72,11 @@ public class RegraAluno implements IRegra{
         return qtdExemplarDisponivel;
     }
 
-    public boolean buscaQtdReservaLivroMenorDisponivel(int codigoLivro){
+    public boolean buscaQtdReservaLivroMenorDisponivel(int codigoLivro, List<ReservaLivroUsuario> reservas, Biblioteca biblioteca){
         boolean resultado = true;
 
-        int qtdReservasLivro = buscaQtdReservasLivro(codigoLivro);
-        int qtdExemplarLivroDisponivel = buscaQtdExemplarDisponivel(codigoLivro);
+        int qtdReservasLivro = buscaQtdReservasLivro(codigoLivro, reservas);
+        int qtdExemplarLivroDisponivel = buscaQtdExemplarDisponivel(codigoLivro, biblioteca);
 
         if(qtdReservasLivro > qtdExemplarLivroDisponivel){
             resultado = false;
@@ -101,7 +85,7 @@ public class RegraAluno implements IRegra{
         return resultado;
     }
 
-    public int buscaQtdExemplaresReservado(int codigoLivro){
+    public int buscaQtdExemplaresReservado(int codigoLivro, List<ReservaLivroUsuario> reservas){
         int qtdExemplaresReservado = 0;
 
         for(ReservaLivroUsuario reserva : reservas){
@@ -113,7 +97,8 @@ public class RegraAluno implements IRegra{
         return qtdExemplaresReservado;
     }
 
-    public boolean buscaAlgumaReservaUsuario(int codigoUsario){
+    public boolean buscaAlgumaReservaUsuario(int codigoUsario, List<ReservaLivroUsuario> reservas){
+
         boolean resultado = false;
 
         for(ReservaLivroUsuario reserva : reservas){
@@ -125,7 +110,7 @@ public class RegraAluno implements IRegra{
         return resultado;
     }
 
-    public boolean buscaEmprestimoUsarioLivro(int codigoLivro, int codigoUsuario){
+    public boolean buscaEmprestimoUsarioLivro(int codigoLivro, int codigoUsuario, List<IEmprestimo> emprestimos){
             boolean resultado = true;
 
             for(IEmprestimo emprestimo : emprestimos){
@@ -135,7 +120,7 @@ public class RegraAluno implements IRegra{
             return resultado;
     }
 
-    public boolean buscaReservaUsarioLivro(int codigoLivro, int codigoUsuario){
+    public boolean buscaReservaUsarioLivro(int codigoLivro, int codigoUsuario, List<ReservaLivroUsuario> reservas){
         boolean resultado = false;
 
         for(ReservaLivroUsuario reserva : reservas){
@@ -145,46 +130,48 @@ public class RegraAluno implements IRegra{
         return resultado;
     }
 
-    public boolean verificaDisponibilidade(int codigoLivro, int codigoUsuario){
+    public boolean verificaDisponibilidade(int codigoLivro, int codigoUsuario, Biblioteca biblioteca, List<ReservaLivroUsuario> reservas){
 
-        boolean resultado = (biblioteca.buscaStatusDisponivel(codigoLivro) || buscaReservaUsarioLivro(codigoLivro, codigoUsuario));
-
-        return resultado;
-    }
-
-    public boolean verificaDevedor(LocalDate date, int codigoUsuario){
-
-        boolean resultado = buscaEmprestimoDataUsuario(date, codigoUsuario);
-
-        return resultado;
-
-    }
-
-    public boolean verficarLimiteEmprestimo(int codigoUsuario){
-        boolean resultado = buscaNumeroEmprestimoUsuario(codigoUsuario);
+        boolean resultado = (biblioteca.buscaStatusDisponivel(codigoLivro) || buscaReservaUsarioLivro(codigoLivro, codigoUsuario, reservas));
 
         return resultado;
     }
 
-    public boolean verificarMenoresExemplaresDisponiveisParaNaoReservantes(int codigoLivro, int codigoUsuario){
+    public boolean verificaDevedor(LocalDate date, int codigoUsuario, List<IEmprestimo> emprestimos){
+
+
+        boolean resultado = buscaEmprestimoDataUsuario(date, codigoUsuario, emprestimos);
+
+        return resultado;
+
+    }
+
+    public boolean verficarLimiteEmprestimo(int codigoUsuario, List<IEmprestimo> emprestimos){
+        boolean resultado = buscaNumeroEmprestimoUsuario(codigoUsuario, emprestimos);
+
+        return resultado;
+    }
+
+    public boolean verificarMenoresExemplaresDisponiveisParaNaoReservantes(int codigoLivro, int codigoUsuario, List<ReservaLivroUsuario> reservas, Biblioteca biblioteca){
+
 
         boolean resultado = true;
 
-        if(buscaLivroSemReservaUsuario(codigoLivro, codigoUsuario)){
-            resultado = buscaQtdReservaLivroMenorDisponivel(codigoLivro);
+        if(buscaLivroSemReservaUsuario(codigoLivro, codigoUsuario, reservas)){
+            resultado = buscaQtdReservaLivroMenorDisponivel(codigoLivro, reservas, biblioteca);
         }
         
         return resultado;
     }
 
 
-    public boolean verficarQtdReversasMaiorIgualExemplaresUsarioReservou(int codigoLivro, int codigoUsuario){
+    public boolean verficarQtdReversasMaiorIgualExemplaresUsarioReservou(int codigoLivro, int codigoUsuario, Biblioteca biblioteca, List<ReservaLivroUsuario> reservas){
         boolean resultado = false;
         
-        int qtdExemplares = buscaQtdExemplarDisponivel(codigoLivro);
-        int qtdExemplaresReservados = buscaQtdExemplaresReservado(codigoLivro);
+        int qtdExemplares = buscaQtdExemplarDisponivel(codigoLivro, biblioteca);
+        int qtdExemplaresReservados = buscaQtdExemplaresReservado(codigoLivro, reservas);
 
-        if(buscaAlgumaReservaUsuario(codigoUsuario)){
+        if(buscaAlgumaReservaUsuario(codigoUsuario, reservas)){
             resultado = (qtdExemplaresReservados >= qtdExemplares);
         }else{
             resultado = true;
@@ -194,35 +181,25 @@ public class RegraAluno implements IRegra{
         
     }
 
-    public boolean verificarUsarioEmprestimoIgual(int codigoLivro, int codigoUsuario){
-        boolean resultado = buscaEmprestimoUsarioLivro(codigoLivro, codigoUsuario);
+    public boolean verificarUsarioEmprestimoIgual(int codigoLivro, int codigoUsuario, List<IEmprestimo> emprestimos){
+        boolean resultado = buscaEmprestimoUsarioLivro(codigoLivro, codigoUsuario, emprestimos);
 
         return resultado;
     }
 
     public boolean checaEmprestimo(int codigoLivro, int codigoUsuario, LocalDate date, List<IEmprestimo> emprestimos, List<ReservaLivroUsuario> reservas, Biblioteca biblioteca){
 
-        setListaEmprestimo(emprestimos);
-        setBiblioteca(biblioteca);
-        setListaReserva(reservas);
-
-        if(!verificaDisponibilidade(codigoLivro, codigoUsuario)) return false;
-        if(!verificaDevedor(date, codigoUsuario)) return false;
-        if(!verficarLimiteEmprestimo(codigoUsuario)) return false;
-        if(!verificarMenoresExemplaresDisponiveisParaNaoReservantes(codigoLivro, codigoUsuario)) return false;
-        if(!verficarQtdReversasMaiorIgualExemplaresUsarioReservou(codigoLivro, codigoUsuario)) return false;
-        if(!verificarUsarioEmprestimoIgual(codigoLivro, codigoUsuario)) return false;
+        if(!verificaDisponibilidade(codigoLivro, codigoUsuario, biblioteca, reservas)) return false;
+        if(!verificaDevedor(date, codigoUsuario, emprestimos)) return false;
+        if(!verficarLimiteEmprestimo(codigoUsuario, emprestimos)) return false;
+        if(!verificarMenoresExemplaresDisponiveisParaNaoReservantes(codigoLivro, codigoUsuario, reservas, biblioteca)) return false;
+        if(!verficarQtdReversasMaiorIgualExemplaresUsarioReservou(codigoLivro, codigoUsuario, biblioteca, reservas)) return false;
+        if(!verificarUsarioEmprestimoIgual(codigoLivro, codigoUsuario, emprestimos)) return false;
         return true;
     }
 
     public IRegra getRegra(){
         return this;
-    }
-
-    public LocalDate DataPrevistaDevolucao(LocalDate dataEmprestimo){
-        LocalDate dataPrevistaDevolucao = dataEmprestimo.plusDays(3);
-
-        return dataPrevistaDevolucao;
     }
  
 }

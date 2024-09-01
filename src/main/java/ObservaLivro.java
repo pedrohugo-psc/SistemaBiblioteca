@@ -8,10 +8,8 @@ import java.util.List;
 public class ObservaLivro{
 
   private ArrayList<Observador> observadores;
-  private List<ReservaLivroUsuario> reservas;
 
-  public ObservaLivro(List<ReservaLivroUsuario> reservas){
-    this.reservas = reservas;
+  public ObservaLivro(){
     observadores = new ArrayList<>();
   }
 
@@ -26,7 +24,7 @@ public class ObservaLivro{
       }
   }
 
-  public void verificaReservaSimultaneas(int idLivro){
+  public void verificaReservaSimultaneas(int idLivro, List<ReservaLivroUsuario> reservas){
     int contador = 0;
     for(ReservaLivroUsuario reserva: reservas){
       if(reserva.getExemplar().getIdLivro() == idLivro){
