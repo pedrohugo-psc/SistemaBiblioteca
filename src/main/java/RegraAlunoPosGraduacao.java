@@ -21,7 +21,7 @@ public class RegraAlunoPosGraduacao implements IRegra{
             }
         }
 
-        if (numEmprestimo > 4) {
+        if (numEmprestimo >= 4) {
             resultado = false;
         }
 
